@@ -6,46 +6,49 @@ using UnityEngine.UI;
 public class MaterialPropertyLink : MonoBehaviour
 {
 
-	public GameObject diceCore;
-	public Renderer rend;
-	private Material material;
-	public string floatName;
-	public float value;
-	public string toggleName;
-	private float toggleValue = 1;
+    public GameObject diceCore;
+    public Renderer[] renderers;
+    private List<Material> materials = new List<Material>();
+    public string floatName;
+    public float value;
+    public string toggleName;
+    private float toggleValue = 1;
 
-	public Slider slider;
-	public Toggle toggle;
+    public Slider slider;
+    public Toggle toggle;
 
-	private int signChange = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-    	
-
-    }
+    private int signChange = 1;
 
     // Update is called once per frame
     void Update()
     {
-        //rend = diceCore.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>();
-        //material = rend.material;
-        value = slider.value;
-        if (material != null)
-        {
-            material.SetFloat(floatName, value);
-        }
-        
+
     }
 
- 
-    public void SetMaterialToggle()
+
+    public void SetMaterialToggle(float val)
     {
-        rend = diceCore.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>();
-        material = rend.material;
-    	signChange *= -1;
-    	toggleValue += signChange;
-    	material.SetFloat(toggleName, toggleValue);
-    	print(toggleValue);
+        renderers = diceCore.GetComponentsInChildren<MeshRenderer>();
+
+        foreach (MeshRenderer renderer in renderers)
+        {
+            if (!materials.Contains(renderer.sharedMaterial))
+                materials.Add(renderer.sharedMaterial);
+        }
+
+        foreach (Material material in materials)
+        {
+            material.SetFloat(floatName, val);
+            if (val > 0)
+            {
+                material.SetFloat(toggleName, 1);
+            }
+            else
+            {
+                material.SetFloat(toggleName, 0);
+            }
+        }
+
+        print(toggleValue);
     }
 }

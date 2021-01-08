@@ -51,6 +51,8 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
     public void LoadModel()
     {
         var assetLoaderOptions = AssetLoader.CreateDefaultLoaderOptions();
+        assetLoaderOptions.ImportMaterials = false;
+        assetLoaderOptions.ImportNormals = false;
         var assetLoaderFilePicker = AssetLoaderFilePicker.Create();
         assetLoaderFilePicker.LoadModelFromFilePickerAsync("Select a Model file", OnLoad, OnMaterialsLoad, OnProgress, OnBeginLoad, OnError, null, assetLoaderOptions);
     }
@@ -114,7 +116,6 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
         loadedObject = assetLoaderContext.RootGameObject;
         if (loadedObject != null)
         {
-            //Camera.main.FitToBounds(assetLoaderContext.RootGameObject, 2f);
             Debug.Log("Model loaded. Loading materials.");
         }
         else
@@ -122,14 +123,15 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
             Debug.Log("Model materials could not be loaded.");
         }
 
-        loadedObject.transform.SetParent(parentObject.transform, false);
+        //Camera.main.FitToBounds(loadedObject, 5);
 
-        //dice = parentObject.gameObject.transform.GetChild(0).GetChild(0).gameObject;
+        loadedObject.transform.SetParent(parentObject.transform, false);
 
         MeshRenderer[] renderers = loadedObject.GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer renderer in renderers)
         {
             renderer.sharedMaterial = new Material(Shader.Find("Yux/PremiumDice"));
+            renderer.material = new Material(Shader.Find("Yux/PremiumDice"));
         }
 
         loaderButton.interactable = true;

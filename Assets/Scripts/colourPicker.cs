@@ -1,30 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
-public class colourPicker : MonoBehaviour {
+public class colourPicker : MonoBehaviour
+{
 
     public GameObject ColorPickedPrefab;
     private ColorPickerTriangle CP;
     private bool isPaint = false;
     private GameObject go;
     public Image img;
-    private Renderer rend;
-    private Material material;
+    private MeshRenderer[] renderers;
+    private List<Material> materials = new List<Material>();
     public GameObject diceCore;
     public string matAtt;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
         if (isPaint)
         {
             img.color = CP.TheColor;
-            material.SetColor(matAtt, img.color);
+            foreach (Material material in materials)
+            {
+                material.SetColor(matAtt, img.color);
+            }
         }
     }
 
@@ -42,13 +42,16 @@ public class colourPicker : MonoBehaviour {
 
     private void StartPaint()
     {
-        rend = diceCore.gameObject.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>();
-        material = rend.sharedMaterial;
+        renderers = diceCore.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer mr in renderers)
+        {
+            materials.Add(mr.sharedMaterial);
+        }
+        
         ColorPickedPrefab.SetActive(true);
         CP = ColorPickedPrefab.GetComponent<ColorPickerTriangle>();
         CP.SetNewColor(img.color);
-        
-        
+
         isPaint = true;
     }
 
@@ -56,6 +59,6 @@ public class colourPicker : MonoBehaviour {
     {
         ColorPickedPrefab.SetActive(false);
         isPaint = false;
-        print ("Current rim light colour is " +img.color);
+        print("Current rim light colour is " + img.color);
     }
 }
