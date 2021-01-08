@@ -38,21 +38,21 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
@@ -851,8 +851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f8af05f55fd494390ac15722fe8eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 0}
-  m_Renderer: {fileID: 0}
 --- !u!114 &259044332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,10 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c95b7bf39e4792acecff50a972040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 819408701}
-  replacementImage: {fileID: 819408701}
-  core: {fileID: 293012849}
-  textureName: _SpecTex
 --- !u!114 &265237198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,10 +1561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c95b7bf39e4792acecff50a972040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 0}
-  replacementImage: {fileID: 0}
-  core: {fileID: 0}
-  textureName: 
 --- !u!114 &413580434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2974,10 +2964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c95b7bf39e4792acecff50a972040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 0}
-  replacementImage: {fileID: 0}
-  core: {fileID: 0}
-  textureName: 
 --- !u!114 &717704838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3918,7 +3904,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3942,7 +3928,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0, z: -20}
+  m_LocalPosition: {x: 3.5, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4757,10 +4743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c95b7bf39e4792acecff50a972040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 1680737612}
-  replacementImage: {fileID: 1680737612}
-  core: {fileID: 293012849}
-  textureName: _MainTex
 --- !u!114 &1376323643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6953,10 +6935,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331c95b7bf39e4792acecff50a972040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preview: {fileID: 702876215}
-  replacementImage: {fileID: 702876215}
-  core: {fileID: 293012849}
-  textureName: _NormalTex
 --- !u!114 &2061536067
 MonoBehaviour:
   m_ObjectHideFlags: 0
