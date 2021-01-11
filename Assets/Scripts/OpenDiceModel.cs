@@ -25,6 +25,8 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
 
     Button loaderButton;
 
+    public bool importNormals = false;
+
     public void OnPointerDown(PointerEventData eventData) { }
 
     void Start()
@@ -52,7 +54,7 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
     {
         var assetLoaderOptions = AssetLoader.CreateDefaultLoaderOptions();
         assetLoaderOptions.ImportMaterials = false;
-        assetLoaderOptions.ImportNormals = false;
+        assetLoaderOptions.ImportNormals = importNormals;
         var assetLoaderFilePicker = AssetLoaderFilePicker.Create();
         assetLoaderFilePicker.LoadModelFromFilePickerAsync("Select a Model file", OnLoad, OnMaterialsLoad, OnProgress, OnBeginLoad, OnError, null, assetLoaderOptions);
     }
@@ -125,14 +127,30 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
 
         //Camera.main.FitToBounds(loadedObject, 5);
 
-        loadedObject.transform.SetParent(parentObject.transform, false);
+        //Vector3 newPosition = loadedObject.GetComponentsInChildren<> parentObject.transform.position
 
         MeshRenderer[] renderers = loadedObject.GetComponentsInChildren<MeshRenderer>();
+
+        //Calculate center of the model
+
+        Bounds biggestBounds = new Bounds();
+
         foreach (MeshRenderer renderer in renderers)
         {
+            if(renderer.GetComponent<MeshFilter>().sharedMesh.bounds.size.magnitude > biggestBounds.size.magnitude)
+            {
+                biggestBounds = renderer.GetComponent<MeshFilter>().sharedMesh.bounds;
+            }
+
             renderer.sharedMaterial = new Material(Shader.Find("Yux/PremiumDice"));
             renderer.material = new Material(Shader.Find("Yux/PremiumDice"));
         }
+
+        Vector3 newPosition =  parentObject.transform.position - biggestBounds.center;
+
+        loadedObject.transform.position = newPosition;
+
+        loadedObject.transform.SetParent(parentObject.transform, false);
 
         loaderButton.interactable = true;
     }
