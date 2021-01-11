@@ -142,8 +142,8 @@ public class OpenDiceModel : MonoBehaviour, IPointerDownHandler
                 biggestBounds = renderer.GetComponent<MeshFilter>().sharedMesh.bounds;
             }
 
-            renderer.sharedMaterial = new Material(Shader.Find("Yux/PremiumDice"));
-            renderer.material = new Material(Shader.Find("Yux/PremiumDice"));
+            renderer.sharedMaterial = new Material(diceMat);
+            renderer.material = new Material(diceMat);
         }
 
         Vector3 newPosition =  parentObject.transform.position - biggestBounds.center;

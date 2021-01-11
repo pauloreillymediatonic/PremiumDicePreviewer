@@ -52,6 +52,8 @@ public class LoadTextureButton : MonoBehaviour, IPointerDownHandler
         // mat = dice.GetComponent<Renderer>().material;
         var loader = new WWW(url);
         yield return loader;
+
+        Texture2D newTexture = new Texture2D(loader.texture.width, loader.texture.height);
         if(isNormalTexture)
         {
             Color32[] pixels = loader.texture.GetPixels32();
@@ -60,8 +62,12 @@ public class LoadTextureButton : MonoBehaviour, IPointerDownHandler
                 pixels[i].a = pixels[i].r;
                 pixels[i].r = 0;
             }
-            loader.texture.SetPixels32(pixels);
-            loader.texture.Apply();
+            newTexture.SetPixels32(pixels);
+            newTexture.Apply();
+        }
+        else
+        {
+            newTexture = loader.texture;
         }
 
         preview.texture = loader.texture;
@@ -70,7 +76,7 @@ public class LoadTextureButton : MonoBehaviour, IPointerDownHandler
 
         foreach (Material material in materials)
         {
-            material.SetTexture(textureName, loader.texture);
+            material.SetTexture(textureName, newTexture);
         }
     }
 }
