@@ -1,3 +1,3 @@
 # PremiumDicePreviewer
 
-Unity project for Premium Dicmodel viewer
+Unity project for Premium Dice model viewer
